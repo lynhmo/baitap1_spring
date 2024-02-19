@@ -1,13 +1,14 @@
 package com.example.baitapspringboot.controller;
 
 import com.example.baitapspringboot.dto.CommonDTO;
-import com.example.baitapspringboot.dto.FailResDto;
 import com.example.baitapspringboot.model.Cart;
 import com.example.baitapspringboot.model.User;
 import com.example.baitapspringboot.repo.CartDetailRepository;
 import com.example.baitapspringboot.repo.CartRepository;
 import com.example.baitapspringboot.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -19,7 +20,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CartController {
     private final CartRepository cartRepository;
-    private final CartDetailRepository cartDetailRepository;
     private final UserRepository userRepository;
 
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -49,6 +49,7 @@ public class CartController {
 
     @GetMapping("/all")
     public CommonDTO all() {
+//        Page<Cart> page = cartRepository.findAll(PageRequest.of(0, 5));
         return new CommonDTO(200, "SUCCESS", "All cart", cartRepository.findAll());
     }
 }

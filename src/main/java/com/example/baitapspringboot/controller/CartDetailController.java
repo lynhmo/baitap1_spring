@@ -8,7 +8,8 @@ import com.example.baitapspringboot.repo.CartRepository;
 import com.example.baitapspringboot.repo.ProductRepository;
 import com.example.baitapspringboot.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.Fetch;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -93,8 +94,15 @@ public class CartDetailController {
 
 
     @GetMapping
-    public CommonDTO allCartDetail() {
-        return new CommonDTO(200, "SUCCESS", "All cart detail", cartDetailRepository.findAll());
+    public CommonDTO allCartDetail(@RequestParam("page") Integer pageNum) {
+        if (pageNum == null) {
+            pageNum = 0;
+        }
+        Page<CartDetail> page = cartDetailRepository.findAll(PageRequest.of(pageNum, 2));
+        if (page.getContent().isEmpty()) {
+            throw new IndexOutOfBoundsException("Không ton tai page");
+        }
+        return new CommonDTO(200, "SUCCESS", "All cart detail", page);
     }
 
 
