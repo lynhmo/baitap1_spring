@@ -1,0 +1,5 @@
+1. CRUD cho sản phẩm, danh mục sản phẩm ( lưu ý đối với xóa danh mục sp thì nếu số sản phẩm của danh mục đó > 0 thì không được xóa)
+2. Tạo ra thêm bảng người dùng
+3. lấy ra giỏ hàng theo từng người dùng
+4. Viết api tạo đơn hàng, biết rằng khi đơn hàng tạo thành công thì giỏ hàng phải được xóa
+5. viết api tìm kiếm sản phẩm theo tên hoặc mã hoặc giá sản phẩm
